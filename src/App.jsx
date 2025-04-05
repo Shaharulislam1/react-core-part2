@@ -1,7 +1,11 @@
+import { Suspense } from "react";
 import "./App.css";
 import Batsman from "./Batsman";
 import Counter from "./counter";
- 
+import Users from "./Users";
+
+const fetchUser = fetch("https://jsonplaceholder.typicode.com/users")
+   .then((res) => res.json());
 
 function App() {
   function handleAdd() {
@@ -18,9 +22,12 @@ function App() {
   return (
     <>
       <h3>React Core Concept</h3>
+      <Suspense fallback={<h3>Loading....</h3>}>
+        <Users fetchUser={fetchUser}></Users>
+      </Suspense>
+     
       <Batsman></Batsman>
       <Counter></Counter>
-      
 
       <button onClick={handleAdd}>Click Me</button>
       <button onClick={handleAdd2}>Click her</button>
